@@ -1,8 +1,34 @@
 const $=id=>document.getElementById(id);
 let apiKey=localStorage.getItem("spyt_api_key")||"";
 $("key").value=apiKey;
-async function request(path,options={}){const r=await fetch(path,options);const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||"Error del servidor");return d}
-$("create").onclick=async()=>{const b=$("create");b.disabled=true;$("keyStatus").textContent="Creando clave...";try{const d=await request("/api/keys",{method:"POST"});apiKey=d.apiKey;localStorage.setItem("spyt_api_key",apiKey);$("key").value=apiKey;$("keyStatus").textContent="✅ API Key creada correctamente. Guárdala en un lugar seguro."}catch(e){$("keyStatus").textContent="❌ "+e.message}finally{b.disabled=false}};
-$("copy").onclick=async()=>{if(!apiKey)return;$("key").select();await navigator.clipboard.writeText(apiKey);$("keyStatus").textContent="📋 API Key copiada."};
-$("send").onclick=async()=>{const message=$("message").value.trim();if(!message)return;$("send").disabled=true;$("chat").textContent="Pensando...";try{if(!apiKey)throw new Error("Crea una API Key primero.");const d=await request("/api/chat",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+apiKey},body:JSON.stringify({message})});$("chat").textContent=d.response||"Sin respuesta."}catch(e){$("chat").textContent="❌ "+e.message}finally{$("send").disabled=false}};
-$("message").addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.ctrlKey||e.metaKey))$("send").click()});
+
+async function request(path,options={}){
+  const r=await fetch(path,options);
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(d.error||"Error del servidor");
+  return d;
+}
+
+$("create").onclick=async()=>{
+  const b=$("create");
+  b.disabled=true;
+  $("keyStatus").textContent="Creando clave...";
+  try{
+    const d=await request("/api/keys",{method:"POST"});
+    apiKey=d.apiKey;
+    localStorage.setItem("spyt_api_key",apiKey);
+    $("key").value=apiKey;
+    $("keyStatus").textContent="✅ API Key creada correctamente. Guárdala en un lugar seguro.";
+  }catch(e){
+    $("keyStatus").textContent="❌ "+e.message;
+  }finally{
+    b.disabled=false;
+  }
+};
+
+$("copy").onclick=async()=>{
+  if(!apiKey) return;
+  $("key").select();
+  await navigator.clipboard.writeText(apiKey);
+  $("keyStatus").textContent="📋 API Key copiada.";
+};
