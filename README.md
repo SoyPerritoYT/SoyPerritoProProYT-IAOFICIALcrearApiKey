@@ -1,2 +1,13 @@
-# SoyPerritoProProYT-IAOFICIALcrearApiKey
-🐶 SoyPerritoProProYT-IAOFICIALcrearApiKey es el sistema oficial para crear y gestionar claves API de SoyPerritoProProYT-IAOFICIAL. Genera claves únicas para conectar aplicaciones y proyectos con la IA de SoyPerritoProProYT y utilizar su chat mediante API. 🚀🤖
+# 🐶 SoyPerritoProProYT-IAOFICIALcrearApiKey
+
+Sistema oficial para crear y utilizar claves API de **SoyPerritoProProYT-IAOFICIAL**.
+
+## Incluye
+- 🔑 Generación de claves `spyt_live_...`
+- 📋 Copiar API Key
+- 🔐 Validación HMAC en servidor
+- 💬 `POST /api/chat`
+- 🤖 Conexión con SoyPerritoProProYT-IAOFICIAL
+- 🐶 Identidad del creador
+
+Creado por **SoyPerritoProProYT** 🐶🔥
